@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:www.anthropic.com)",
+      "WebFetch(domain:martinfowler.com)",
+      "WebFetch(domain:www.langchain.com)",
+      "WebFetch(domain:openai.com)",
+      "WebFetch(domain:www.philschmid.de)",
+      "WebFetch(domain:www.infoq.com)",
+      "WebFetch(domain:www.epsilla.com)",
+      "Bash(npm create:*)",
+      "Bash(shopt -s dotglob)",
+      "Bash(mv /Users/bowlofnoodles/Documents/code/agent-harness-demo/temp-init/* /Users/bowlofnoodles/Documents/code/agent-harness-demo/)",
+      "Bash(rmdir /Users/bowlofnoodles/Documents/code/agent-harness-demo/temp-init)",
+      "Bash(mv /Users/bowlofnoodles/Documents/code/agent-harness-demo/temp-init/.gitignore /Users/bowlofnoodles/Documents/code/agent-harness-demo/)",
+      "Bash(npm install:*)",
+      "Bash(git init:*)",
+      "Bash(npx husky:*)",
+      "Bash(npx shadcn@latest:*)"
+    ]
+  }
+}
