@@ -1,73 +1,60 @@
-# React + TypeScript + Vite
+# Agent Harness Demo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React frontend project built with harness engineering principles — designed so AI coding agents work effectively within well-defined constraints, feedback loops, and verification systems.
 
-Currently, two official plugins are available:
+The app is a simple **Task Board** where you can add tasks, move them through statuses (To Do → In Progress → Done), and delete them.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tech Stack
 
-## React Compiler
+- **Framework**: React 19 + TypeScript (strict mode)
+- **Build**: Vite 8
+- **Styling**: Tailwind CSS v4 + shadcn/ui
+- **Testing**: Vitest + React Testing Library
+- **Linting**: ESLint with typescript-eslint + react-hooks + react-refresh
+- **Git Hooks**: Husky + lint-staged (pre-commit runs lint)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Getting Started
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Commands
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev          # Start dev server
+npm run build        # Type-check + production build
+npm run typecheck    # TypeScript type checking only
+npm run lint         # ESLint
+npm run test         # Run tests once
+npm run test:watch   # Run tests in watch mode
+npm run verify       # Full pipeline: typecheck → lint → test
 ```
+
+## Project Structure
+
+```
+src/
+├── components/       # Reusable UI components
+│   ├── ui/           # shadcn/ui primitives (generated — do not hand-edit)
+│   └── layout/       # Layout components (header, etc.)
+├── pages/            # Page-level components (one per route/view)
+├── hooks/            # Custom React hooks
+├── types/            # TypeScript type definitions
+├── lib/              # Utility functions
+└── test/             # Test setup and shared test utilities
+```
+
+## Architecture Rules
+
+1. **Component hierarchy**: `pages/` → `components/` → `components/ui/`. Never import upward.
+2. **shadcn/ui components** (`src/components/ui/`): Add via `npx shadcn@latest add <component>`. Do not hand-edit these files.
+3. **Path aliases**: Always use `@/` imports (e.g., `@/components/ui/button`), never relative paths crossing directories.
+4. **Type safety**: TypeScript strict mode is on. No `any` types, no `@ts-ignore`.
+5. **State management**: Use React's built-in state (`useState`, `useReducer`, `useContext`).
+6. **Styling**: Use Tailwind utility classes only. No CSS modules or inline style objects.
+
+## Docs
+
+See [`docs/harness-engineering.md`](docs/harness-engineering.md) for the full harness engineering principles behind this project.
